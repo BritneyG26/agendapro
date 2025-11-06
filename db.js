@@ -6,7 +6,9 @@ const pool = new Pool({
     database: 'node-agenda-db',
     password: 'Edu123-1',
     port: 5432,
-    ssl: false
+    ssl: {
+        rejectUnauthorized: false
+    }
 });
 
 module.exports = pool

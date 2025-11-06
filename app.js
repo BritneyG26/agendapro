@@ -60,6 +60,8 @@ app.get("/delete/:id", async (req, res) => {
 });
 
 app.get("/", async (req, res) => {
+  let eventsJSON;
+  
   try{
     const result = await pool.query("SELECT * FROM events ORDER BY day ASC");
     const eventsJSON = result.rows;
@@ -67,7 +69,6 @@ app.get("/", async (req, res) => {
     console.log(eventsJSON)
     res.render("home", {events: eventsJSON});
   }catch(err){
-    console.log(eventsJSON)
     console.error(err);
     res.status(500).send('Internal Server Error')
   }
