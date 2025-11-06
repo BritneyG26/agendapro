@@ -1,9 +1,364 @@
-<html>
-    <head>
-        <title>Home</title>
-    </head>
-
-    <body>
-        <h1>Home</h1>
-    </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>November 2025 Calendar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        h1 {
+            margin: 0;
+        }
+        .add-event-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .add-event-btn:hover {
+            background-color: #45a049;
+        }
+        .calendar {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .calendar th {
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 18px;
+        }
+        .calendar td {
+            border: 2px solid #333;
+            height: 120px;
+            width: 14.28%;
+            vertical-align: top;
+            padding: 10px;
+        }
+        .day-number {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .empty {
+            background-color: #f0f0f0;
+        }
+        .event-item {
+            font-size: 14px;
+            padding: 2px 0;
+            color: #333;
+        }
+        .event-link {
+            display: block;
+            text-decoration: none;
+            color: #333;
+            padding: 5px;
+            margin: 2px 0;
+            background-color: #e3f2fd;
+            border-radius: 3px;
+            font-size: 14px;
+        }
+        .event-link:hover {
+            background-color: #bbdefb;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>November 2025</h1>
+        <button class="add-event-btn" onclick="window.location.href='/add-event'">Añadir Evento</button>
+    </div>
+    <table class="calendar">
+        <thead>
+            <tr>
+                <th>Sunday</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+                <th>Saturday</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="empty"></td>
+                <td class="empty"></td>
+                <td class="empty"></td>
+                <td class="empty"></td>
+                <td class="empty"></td>
+                <td class="empty"></td>
+                <td>
+                    <div class="day-number">1</div>
+                    <% events.filter(e => e.day === 1).forEach(event => { %>
+                        <a href="/event/<%= event.id %>" class="event-link">
+                            <div><%= event.name_event %></div>
+                        </a>
+                    <% }); %>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="day-number">2</div>
+                    <% events.filter(e => e.day === 2).forEach(event => { %>
+                        <a href="/event/<%= event.id %>" class="event-link">
+                            <div><%= event.name_event %></div>
+                        </a>
+                    <% }); %>
+                </td>
+                <td>
+                    <div class="day-number">3</div>
+                    <% events.filter(e => e.day === 3).forEach(event => { %>
+                        <a href="/event/<%= event.id %>" class="event-link">
+                            <div><%= event.name_event %></div>
+                        </a>
+                    <% }); %>
+                </td>
+                <td>
+                    <div class="day-number">4</div>
+                    <% events.filter(e => e.day === 4).forEach(event => { %>
+                        <a href="/event/<%= event.id %>" class="event-link">
+                            <div><%= event.name_event %></div>
+                        </a>
+                    <% }); %>
+                </td>
+                <td>
+                    <div class="day-number">5</div>
+                    <% events.filter(e => e.day === 5).forEach(event => { %>
+                        <a href="/event/<%= event.id %>" class="event-link">
+                            <div><%= event.name_event %></div>
+                        </a>
+                    <% }); %>
+                </td>
+                <td>
+                    <div class="day-number">6</div>
+                    <% events.filter(e => e.day === 6).forEach(event => { %>
+                        <a href="/event/<%= event.id %>" class="event-link">
+                            <div><%= event.name_event %></div>
+                        </a>
+                    <% }); %>
+                </td>
+                <td>
+                    <div class="day-number">7</div>
+                    <% events.filter(e => e.day === 7).forEach(event => { %>
+                        <a href="/event/<%= event.id %>" class="event-link">
+                            <div><%= event.name_event %></div>
+                        </a>
+                    <% }); %>
+                </td>
+                <td>
+                    <div class="day-number">8</div>
+                    <% events.filter(e => e.day === 8).forEach(event => { %>
+                        <a href="/event/<%= event.id %>" class="event-link">
+                            <div><%= event.name_event %></div>
+                        </a>
+                    <% }); %>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="day-number">9</div>
+                    <% events.filter(e => e.day === 9).forEach(event => { %>
+                        <a href="/event/<%= event.id %>" class="event-link">
+                            <div><%= event.name_event %></div>
+                        </a>
+                    <% }); %>
+                </td>
+                <td>
+                    <div class="day-number">10</div>
+                    <% events.filter(e => e.day === 10).forEach(event => { %>
+                        <a href="/event/<%= event.id %>" class="event-link">
+                            <div><%= event.name_event %></div>
+                        </a>
+                    <% }); %>
+                </td>
+                <td>
+                    <div class="day-number">11</div>
+                    <% events.filter(e => e.day === 11).forEach(event => { %>
+                        <a href="/event/<%= event.id %>" class="event-link">
+                            <div><%= event.name_event %></div>
+                        </a>
+                    <% }); %>
+                </td>
+                <td>
+                    <div class="day-number">12</div>
+                    <% events.filter(e => e.day === 12).forEach(event => { %>
+                        <a href="/event/<%= event.id %>" class="event-link">
+                            <div><%= event.name_event %></div>
+                        </a>
+                    <% }); %>
+                </td>
+                <td>
+                    <div class="day-number">13</div>
+                    <% events.filter(e => e.day === 13).forEach(event => { %>
+                        <a href="/event/<%= event.id %>" class="event-link">
+                            <div><%= event.name_event %></div>
+                        </a>
+                    <% }); %>
+                </td>
+                <td>
+                    <div class="day-number">14</div>
+                    <% events.filter(e => e.day === 14).forEach(event => { %>
+                        <a href="/event/<%= event.id %>" class="event-link">
+                            <div><%= event.name_event %></div>
+                        </a>
+                    <% }); %>
+                </td>
+                <td>
+                    <div class="day-number">15</div>
+                    <% events.filter(e => e.day === 15).forEach(event => { %>
+                        <a href="/event/<%= event.id %>" class="event-link">
+                            <div><%= event.name_event %></div>
+                        </a>
+                    <% }); %>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="day-number">16</div>
+                    <% events.filter(e => e.day === 16).forEach(event => { %>
+                        <a href="/event/<%= event.id %>" class="event-link">
+                            <div><%= event.name_event %></div>
+                        </a>
+                    <% }); %>
+                </td>
+                <td>
+                    <div class="day-number">17</div>
+                    <% events.filter(e => e.day === 17).forEach(event => { %>
+                        <a href="/event/<%= event.id %>" class="event-link">
+                            <div><%= event.name_event %></div>
+                        </a>
+                    <% }); %>
+                </td>
+                <td>
+                    <div class="day-number">18</div>
+                    <% events.filter(e => e.day === 18).forEach(event => { %>
+                        <a href="/event/<%= event.id %>" class="event-link">
+                            <div><%= event.name_event %></div>
+                        </a>
+                    <% }); %>
+                </td>
+                <td>
+                    <div class="day-number">19</div>
+                    <% events.filter(e => e.day === 19).forEach(event => { %>
+                        <a href="/event/<%= event.id %>" class="event-link">
+                            <div><%= event.name_event %></div>
+                        </a>
+                    <% }); %>
+                </td>
+                <td>
+                    <div class="day-number">20</div>
+                    <% events.filter(e => e.day === 20).forEach(event => { %>
+                        <a href="/event/<%= event.id %>" class="event-link">
+                            <div><%= event.name_event %></div>
+                        </a>
+                    <% }); %>
+                </td>
+                <td>
+                    <div class="day-number">21</div>
+                    <% events.filter(e => e.day === 21).forEach(event => { %>
+                        <a href="/event/<%= event.id %>" class="event-link">
+                            <div><%= event.name_event %></div>
+                        </a>
+                    <% }); %>
+                </td>
+                <td>
+                    <div class="day-number">22</div>
+                    <% events.filter(e => e.day === 22).forEach(event => { %>
+                        <a href="/event/<%= event.id %>" class="event-link">
+                            <div><%= event.name_event %></div>
+                        </a>
+                    <% }); %>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="day-number">23</div>
+                    <% events.filter(e => e.day === 23).forEach(event => { %>
+                        <a href="/event/<%= event.id %>" class="event-link">
+                            <div><%= event.name_event %></div>
+                        </a>
+                    <% }); %>
+                </td>
+                <td>
+                    <div class="day-number">24</div>
+                    <% events.filter(e => e.day === 24).forEach(event => { %>
+                        <a href="/event/<%= event.id %>" class="event-link">
+                            <div><%= event.name_event %></div>
+                        </a>
+                    <% }); %>
+                </td>
+                <td>
+                    <div class="day-number">25</div>
+                    <% events.filter(e => e.day === 25).forEach(event => { %>
+                        <a href="/event/<%= event.id %>" class="event-link">
+                            <div><%= event.name_event %></div>
+                        </a>
+                    <% }); %>
+                </td>
+                <td>
+                    <div class="day-number">26</div>
+                    <% events.filter(e => e.day === 26).forEach(event => { %>
+                        <a href="/event/<%= event.id %>" class="event-link">
+                            <div><%= event.name_event %></div>
+                        </a>
+                    <% }); %>
+                </td>
+                <td>
+                    <div class="day-number">27</div>
+                    <% events.filter(e => e.day === 27).forEach(event => { %>
+                        <a href="/event/<%= event.id %>" class="event-link">
+                            <div><%= event.name_event %></div>
+                        </a>
+                    <% }); %>
+                </td>
+                <td>
+                    <div class="day-number">28</div>
+                    <% events.filter(e => e.day === 28).forEach(event => { %>
+                        <a href="/event/<%= event.id %>" class="event-link">
+                            <div><%= event.name_event %></div>
+                        </a>
+                    <% }); %>
+                </td>
+                <td>
+                    <div class="day-number">29</div>
+                    <% events.filter(e => e.day === 29).forEach(event => { %>
+                        <a href="/event/<%= event.id %>" class="event-link">
+                            <div><%= event.name_event %></div>
+                        </a>
+                    <% }); %>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="day-number">30</div>
+                    <% events.filter(e => e.day === 30).forEach(event => { %>
+                        <a href="/event/<%= event.id %>" class="event-link">
+                            <div><%= event.name_event %></div>
+                        </a>
+                    <% }); %>
+                </td>
+                <td class="empty"></td>
+                <td class="empty"></td>
+                <td class="empty"></td>
+                <td class="empty"></td>
+                <td class="empty"></td>
+                <td class="empty"></td>
+            </tr>
+        </tbody>
+    </table>
+    <footer>VM-1</footer>
+</body>
 </html>
