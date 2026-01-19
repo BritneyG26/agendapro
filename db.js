@@ -1,14 +1,16 @@
-const { Pool } = require('pg');
+const mongoose = require('mongoose');
+const mongoURI = "mongodb+srv://britney94_db_user:BratzPixiez.@cluster0.fizl8r0.mongodb.net/agendapro?retryWrites=true&w=majority&appName=Cluster0";
 
-const pool = new Pool({
-    user: 'vm-acess',
-    host: '10.50.0.3', //Cambiar a IP privada luego
-    database: 'node-agenda-db',
-    password: 'Edu123-1',
-    port: 5432,
-    ssl: {
-        rejectUnauthorized: false
-    }
+mongoose.connect(mongoURI)
+  .then(() => console.log('Conectado a MongoDB Atlas'))
+  .catch(err => console.error('Error de conexión:', err));
+
+const eventSchema = new mongoose.Schema({
+  day: Number,           
+  name_event: String,    
+  description: String
 });
 
-module.exports = pool
+const Event = mongoose.model('Event', eventSchema);
+
+module.exports = Event;

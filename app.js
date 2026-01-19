@@ -1,5 +1,5 @@
 const express = require("express");
-const pool = require('./db');
+const Event = require('./db'); 
 
 const app = express();
 const PORT = process.env.PORT || 80;
@@ -11,66 +11,58 @@ app.use(express.json());
 app.set('view engine', 'ejs');
 app.set('views', __dirname + "/views");
 
-app.post("/new-event", async(req, res) => {
-  try{
-    const{ day, name, description } = req.body;
-
-    await pool.query(
-      "INSERT INTO events (day, name_event, description) VALUES ($1, $2, $3)",
-      [day, name, description]
-    );
-
-    res.redirect("/");
-  }catch(err){
-    console.error(err);
-    res.status(500).send("Internal Server Error");
-  }
-
-});
-
-app.get("/event/:id", async (req, res) => {
+app.post("/new-event", async (req, res) => {
   try {
-    const { id } = req.params;
-    
-    const result = await pool.query("SELECT * FROM events WHERE id = $1", [id]);
-    
-    if (result.rows.length === 0) {
-      return res.status(404).send('Event not found');
-    }
-    
-    const event = result.rows[0];
-    
-    res.render("view", { event: event });
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Internal Server Error');
-  }
-});
-app.get("/delete/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-    
-    await pool.query("DELETE FROM events WHERE id = $1", [id]);
-    
+    const { day, name, description } = req.body;
+    const newEvent = new Event({ 
+        day: parseInt(day), 
+        name_event: name, 
+        description: description 
+    });
+    await newEvent.save();
     res.redirect("/");
   } catch (err) {
     console.error(err);
-    res.status(500).send('Internal Server Error');
+    res.status(500).send("Error al guardar");
   }
 });
 
 app.get("/", async (req, res) => {
-  let eventsJSON;
-  
-  try{
-    const result = await pool.query("SELECT * FROM events ORDER BY day ASC");
-    const eventsJSON = result.rows;
+  try {
+    const docs = await Event.find().sort({ day: 1 });
+    const eventsJSON = docs.map(doc => {
+      const e = doc.toObject();
+      e.id = e._id;
+      return e;
+    });
 
-    console.log(eventsJSON)
-    res.render("home", {events: eventsJSON});
-  }catch(err){
+    res.render("home", { events: eventsJSON });
+  } catch (err) {
     console.error(err);
-    res.status(500).send('Internal Server Error')
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+app.get("/event/:id", async (req, res) => {
+  try {
+    const event = await Event.findById(req.params.id);
+    if (!event) return res.status(404).send('Event not found');
+    
+    const formattedEvent = event.toObject();
+    formattedEvent.id = formattedEvent._id; // Lo mismo aquí para view.ejs
+    
+    res.render("view", { event: formattedEvent });
+  } catch (err) {
+    res.status(500).send('Error');
+  }
+});
+
+app.get("/delete/:id", async (req, res) => {
+  try {
+    await Event.findByIdAndDelete(req.params.id);
+    res.redirect("/");
+  } catch (err) {
+    res.status(500).send('Error');
   }
 });
 
@@ -78,13 +70,10 @@ app.get("/add-event", (req, res) => {
   res.render("add-event");
 });
 
-
-app.use(function(req,res,next){
-    console.log("[SYSTEM] User reached 404");
-    res.status(404);
-    res.sendFile(path.join(__dirname + "/public/404_static.html"));
+app.use(function(req, res, next) {
+    res.status(404).sendFile(path.join(__dirname + "/public/404_static.html"));
 });
 
 app.listen(PORT, () => {
-  console.log(`Servidor escuchando en http://localhost:${PORT}`);
+  console.log(`Servidor Multicloud escuchando en puerto ${PORT}`);
 });
